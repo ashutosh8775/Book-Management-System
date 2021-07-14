@@ -1,0 +1,55 @@
+.form-wrapper .error {
+  color: red;
+}
+
+.form-wrapper .btn-success {
+  width: 100%;
+}
+
+.form-wrapper .form-control,
+.form-wrapper .btn-success {
+  border-radius: 0;
+}
+
+.form-wrapper .form-control,
+.form-wrapper .btn-success {
+  padding: 0.65rem 0.75rem;
+}
+
+.form-wrapper .form-control {
+  background-color: #efefef;
+}
+
+.modal-content {
+  border-radius: 0;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 480px;
+  }
+  .modal-body {
+    padding: 2rem;
+  }
+}
+
+.close {
+  background: transparent;
+  border: 0;
+  position: absolute;
+  right: 10px;
+  top: 0;
+  font-size: 40px;
+  color: #efefef;
+}
+
+.close:hover {
+  color: #333;
+}
+
+.action-btn {
+  background: transparent;
+  border: 0;
+  color: blue;
+}
+/*# sourceMappingURL=Form.css.map */

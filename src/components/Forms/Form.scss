@@ -1,0 +1,66 @@
+.form-wrapper {
+  .error {
+    color: red;
+  }
+  .btn-success {
+    width: 100%;
+  }
+  .form-control,
+  .btn-success {
+    border-radius: 0;
+  }
+
+  .form-control,
+  .btn-success {
+    padding: 0.65rem 0.75rem;
+  }
+  .form-control {
+    background-color: #efefef;
+  }
+}
+
+.modal-content {
+  border-radius: 0;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 480px;
+  }
+  .modal-body {
+    padding: 2rem;
+  }
+}
+.close {
+  background: transparent;
+  border: 0;
+  position: absolute;
+  right: 10px;
+  top: 0;
+  font-size: 40px;
+  color: #efefef;
+  &:hover {
+    color: #333;
+  }
+}
+
+.action-btn {
+  background: transparent;
+  border: 0;
+  color: blue;
+}
+
+// .user-icon {
+//   width: 80px;
+//   height: 80px;
+//   background: #198754;
+//   border-radius: 50%;
+//   font-size: 30px;
+//   margin: 0 auto;
+//   margin-bottom: 10px;
+// }
+
+// .has-error .form-control {
+//   border-color: red;
+//   box-shadow: 0 0 0 0.1rem rgb(247 78 78);
+// }
