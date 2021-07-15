@@ -10,8 +10,12 @@ function App() {
   return (
     <div>
       <Header />
-      <Home />
-      <Review />
+      <Router>
+                <Switch>
+                    <Route exact path='/' component={Home}></Route>
+                    <Route exact path='/bookpreview' component={BookInfo}></Route>                   
+                </Switch>
+            </Router>
       <Footer />
     </div>
   );
