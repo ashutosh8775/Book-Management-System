@@ -45,11 +45,10 @@ class Register extends Component {
 
         this.form.onformsubmit = (fields) => {
             // Do you ajax calls here.  
-            console.log('field', fields);
             if(!this.state.confirmPasswordErr){
                 this.confirmPasswordValidation();
             } else {
-
+                console.log('field', fields);
             }
         }
     }

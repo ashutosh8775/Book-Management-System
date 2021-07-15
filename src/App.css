@@ -1,14 +1,22 @@
-.custom_nav{
+.custom_nav {
   font-size: small;
-  box-shadow: 0px 2px 12px rgba(0,0,0,0.3);
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.3);
 }
 .custom_nav ul.dropdown-menu {
   font-size: small;
 }
-.custom-divider{
+.custom-divider {
   height: 5px;
-  background: rgb(255,145,0);
-  background: linear-gradient(90deg, rgba(255,145,0,1) 0%, rgba(9,9,121,1) 15%, rgba(153,7,128,1) 39%, rgba(5,107,186,1) 59%, rgba(26,221,3,1) 79%, rgba(0,212,255,1) 100%);
+  background: rgb(255, 145, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 145, 0, 1) 0%,
+    rgba(9, 9, 121, 1) 15%,
+    rgba(153, 7, 128, 1) 39%,
+    rgba(5, 107, 186, 1) 59%,
+    rgba(26, 221, 3, 1) 79%,
+    rgba(0, 212, 255, 1) 100%
+  );
 }
 /* .main-banner{
   padding-top: 150px;
@@ -32,20 +40,30 @@ section.features {
 .feature-holder p {
   font-size: 14px;
 }
-section.online-courses, .classroom-training, .reviews-slider, .page-content {
+section.online-courses,
+.classroom-training,
+.reviews-slider,
+.page-content {
   padding-top: 35px;
   padding-bottom: 35px;
 }
-.online-courses-text-widget, .classroom-courses-text-widget, .review-text-widget {
+.online-courses-text-widget,
+.classroom-courses-text-widget,
+.review-text-widget {
   text-align: center;
 }
-.online-courses-text-widget h2, .classroom-courses-text-widget h2, .review-text-widget h2 {
+.online-courses-text-widget h2,
+.classroom-courses-text-widget h2,
+.review-text-widget h2 {
   font-size: 1.3em;
 }
-.online-courses-text-widget p, .classroom-courses-text-widget p, .review-text-widget p {
+.online-courses-text-widget p,
+.classroom-courses-text-widget p,
+.review-text-widget p {
   font-size: 14px;
 }
-.online-course-card, .review-text-widget {
+.online-course-card,
+.review-text-widget {
   text-align: center;
   margin-bottom: 25px;
 }
@@ -56,10 +74,11 @@ section.online-courses, .classroom-training, .reviews-slider, .page-content {
 .card.online-course-card .card-text {
   font-size: 14px;
 }
-.classroom-training, .page-content{
+.classroom-training,
+.page-content {
   background-color: whitesmoke;
 }
-.reviews-slider{
+.reviews-slider {
   background-color: #ececec;
 }
 .sign-up-form-sidebar .card-title {
@@ -73,25 +92,25 @@ section.online-courses, .classroom-training, .reviews-slider, .page-content {
   padding-top: 20px;
   color: black;
 }
-.course-list-item h5{
+.course-list-item h5 {
   font-size: 1.2em;
 }
-#review_slider_content li .card{
+#review_slider_content li .card {
   text-align: center;
 }
-#review_slider_content li .card img{
+#review_slider_content li .card img {
   width: 50px;
   margin-bottom: 15px;
 }
-#review_slider_content li .card .card-title{
+#review_slider_content li .card .card-title {
   font-size: 18px;
   font-weight: bold;
 }
-#review_slider_content li .card .star{
+#review_slider_content li .card .star {
   color: orange;
   font-size: 14px;
 }
-#review_slider_content li .card .card-text{
+#review_slider_content li .card .card-text {
   font-size: 14px;
 }
 footer.main-footer {
@@ -132,16 +151,25 @@ section.copy {
   font-size: 14px;
   text-align: center;
 }
-section.copy p{
+section.copy p {
   margin: 0px;
 }
-.google-map{
+.google-map {
   padding-top: 56px;
 }
-.mr-auto{
-  margin-right:auto !important;
+.mr-auto {
+  margin-right: auto !important;
 }
-.text-class{
-  color:#fff;
-  padding-right:10px;
+.text-class {
+  color: #fff;
+  padding-right: 10px;
+}
+
+.online-courses {
+  margin-top: 70px;
+}
+@media screen and (max-width: 767px) {
+  .online-courses {
+    margin-top: 100px;
+  }
 }

@@ -1,7 +1,4 @@
 .form-wrapper {
-  .error {
-    color: red;
-  }
   .btn-success {
     width: 100%;
   }
@@ -12,7 +9,7 @@
 
   .form-control,
   .btn-success {
-    padding: 0.65rem 0.75rem;
+    padding: 0.5rem 0.75rem;
   }
   .form-control {
     background-color: #efefef;
@@ -25,10 +22,10 @@
 
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 480px;
+    max-width: 400px !important;
   }
   .modal-body {
-    padding: 2rem;
+    padding: 2rem 2rem 1rem 2rem !important;
   }
 }
 .close {
@@ -49,7 +46,9 @@
   border: 0;
   color: blue;
 }
-
+.error {
+  color: red;
+}
 // .user-icon {
 //   width: 80px;
 //   height: 80px;

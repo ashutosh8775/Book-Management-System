@@ -1,0 +1,83 @@
+.review-section .card {
+  -webkit-box-shadow: 6px 6px 8px #efefef;
+          box-shadow: 6px 6px 8px #efefef;
+}
+
+.review-section .border-bottom-green {
+  border-bottom: 3px solid #198754 !important;
+}
+
+.review-form-wrapper .accordion button {
+  color: #fff;
+  background-color: #198754;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid transparent;
+}
+
+.review-form-wrapper .accordion .card-body {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-top: 10px;
+}
+
+.review-form-wrapper .accordion label {
+  font-weight: 600;
+}
+
+.review-form-wrapper .accordion .form-star-wrapper .form-label {
+  display: block;
+  margin-bottom: 0;
+}
+
+.review-form-wrapper .accordion .form-star-wrapper .error {
+  display: block;
+}
+
+.review-form-wrapper .accordion .dv-star-rating-star i {
+  font-size: 28px;
+}
+
+@media screen and (min-width: 576px) {
+  .review-form-wrapper .accordion .no-event {
+    pointer-events: none;
+  }
+  .review-form-wrapper .accordion .collapse {
+    display: block !important;
+  }
+}
+
+.pagination-wrapper .pagination {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+}
+
+.pagination-wrapper .pagination li {
+  margin: 5px 5px 0 0;
+}
+
+.pagination-wrapper .pagination .page-link {
+  background-color: #fff !important;
+  color: #212529;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  width: 50px;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.pagination-wrapper .pagination .page-link:hover, .pagination-wrapper .pagination .page-link.active {
+  background-color: #198754 !important;
+  color: #fff;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+/*# sourceMappingURL=Review.css.map */

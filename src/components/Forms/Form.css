@@ -1,7 +1,3 @@
-.form-wrapper .error {
-  color: red;
-}
-
 .form-wrapper .btn-success {
   width: 100%;
 }
@@ -13,7 +9,7 @@
 
 .form-wrapper .form-control,
 .form-wrapper .btn-success {
-  padding: 0.65rem 0.75rem;
+  padding: 0.5rem 0.75rem;
 }
 
 .form-wrapper .form-control {
@@ -26,10 +22,10 @@
 
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 480px;
+    max-width: 400px !important;
   }
   .modal-body {
-    padding: 2rem;
+    padding: 2rem 2rem 1rem 2rem !important;
   }
 }
 
@@ -51,5 +47,9 @@
   background: transparent;
   border: 0;
   color: blue;
+}
+
+.error {
+  color: red;
 }
 /*# sourceMappingURL=Form.css.map */
