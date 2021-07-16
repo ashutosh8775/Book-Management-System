@@ -5,6 +5,13 @@ import Header from './components/Header/headerComponent';
 import Footer from './components/Footer/footerComponent';
 import FormModal from './components/Forms/FormModal';
 import Review from './components/BookPreview/Reviews/Review';
+import BookInfo from './components/BookPreview/BookInfo';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
 
 function App() {
   return (
