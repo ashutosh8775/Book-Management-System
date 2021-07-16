@@ -5,13 +5,24 @@ import Header from './components/Header/headerComponent';
 import Footer from './components/Footer/footerComponent';
 import FormModal from './components/Forms/FormModal';
 import Review from './components/BookPreview/Reviews/Review';
+import BookInfo from './components/BookPreview/BookInfo';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
 
 function App() {
   return (
     <div>
       <Header />
-      <Home />
-      <Review />
+      <Router>
+                <Switch>
+                    <Route exact path='/' component={Home}></Route>
+                    <Route exact path='/bookpreview' component={BookInfo}></Route>                   
+                </Switch>
+            </Router>
       <Footer />
     </div>
   );

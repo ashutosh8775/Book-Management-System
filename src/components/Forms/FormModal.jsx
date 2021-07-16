@@ -27,7 +27,7 @@ class FormModal extends Component {
                         show={this.props.show}
                         onHide={this.handleClose}
                         backdrop="static"
-                        keyboard={false}
+                        keyboard={true}
                         centered
                         animation={false}
                     >
