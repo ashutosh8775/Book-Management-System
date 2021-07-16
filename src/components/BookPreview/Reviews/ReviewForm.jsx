@@ -1,7 +1,7 @@
-import React, {Component} from "react";
+import React, {Component} from 'react';
 import {Accordion, Card} from 'react-bootstrap';
 import StarRatingComponent from 'react-star-rating-component';
-
+import axios from 'axios';
 class ReviewForm extends Component {
     constructor(props){
         super(props);
@@ -32,10 +32,34 @@ class ReviewForm extends Component {
         } else if (this.state.description == ''){
             this.setState({descErrMsg:'Review Description in required'});
         } else {
-            console.log('state==',this.state)
             //api call will come here
+            let date = new Date();
+            let formattedDate = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+            axios.post('http://localhost:3002/addReview', {
+               user_id:1,
+               book_id:2,
+               review:this.state.description,
+               title:this.state.title,
+               rating:this.state.rating,
+               date: formattedDate
+            })
+            .then(response => {
+                if(response.data[0].status == "success"){  
+                    this.setState({title:'', description:'',rating:''});
+                    //this.props.getReviews();
+                    let updateReviewList = this.props.reviewsList;
+                    updateReviewList.unshift(response.data[0].data[0]);
+                    this.props.handleClick(updateReviewList);
+                } else {
+                    throw response.data[0].message;
+                }
+            })
+            .catch(error => {
+                console.log('error', error);
+            });
         }
     }
+    
 
     render() { 
         return ( 

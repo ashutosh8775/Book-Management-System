@@ -7,6 +7,10 @@ import "./Review.css";
 
 
 class Review extends Component {
+    constructor(props){
+        super(props);
+        this.myRef = React.createRef();
+    }
     state = { 
         reviewsList : [],
         loading: false,
@@ -16,13 +20,19 @@ class Review extends Component {
 
     getReviews = async () => {
         this.setState({loading: true});
-        const res = await axios.get("https://jsonplaceholder.typicode.com/comments");
+        const res = await axios.get("http://localhost:3002/getReview/2");
         this.setState({reviewsList: res.data});
         this.setState({loading: false});
     }
 
     paginate = (pageNumber) => {
         this.setState({currentPage: pageNumber});
+        console.log('current', this.myRef.current);
+        this.myRef.current.scrollIntoView();
+    }
+
+    handleClick = obj => {
+        this.setState({reviewsList: obj});
     }
 
     componentDidMount(){
@@ -33,23 +43,36 @@ class Review extends Component {
         const indexOfLastReview = this.state.currentPage * this.state.reviewPerPage;
         const indexOfFirstReview = indexOfLastReview - this.state.reviewPerPage;
         const currentPosts =  this.state.reviewsList.slice(indexOfFirstReview, indexOfLastReview);
-
+        
         return ( 
-            <div className="review-section pb-5">
+            <div className="review-section pb-5" ref={this.myRef}>
                <div className="container">
                    <div className="row">
                        <div className="col-lg-8">
                             <h2 class="border-bottom-green pb-2 mb-4">Reviews</h2>
-                            <ReviewList reviewList={currentPosts} loading={this.state.loading}/>
-                            <ReviewPagination  
-                                reviewPerPage={this.state.reviewPerPage}
-                                totalReview={this.state.reviewsList.length}
-                                paginate={this.paginate}
-                                currentPage={this.state.currentPage}
-                            />
+                            {
+                                this.state.reviewsList.length < 1 ?
+                                <h5>No Reviews.</h5> :
+                                <ReviewList reviewList={currentPosts} loading={this.state.loading}/>
+                            }
+                            
+                            {
+                                this.state.reviewsList.length > this.state.reviewPerPage ?
+                                <ReviewPagination  
+                                    reviewPerPage={this.state.reviewPerPage}
+                                    totalReview={this.state.reviewsList.length}
+                                    paginate={this.paginate}
+                                    currentPage={this.state.currentPage}
+                                /> : ''
+                            }
+                            
                         </div>
                         <div className="col-lg-4">
-                            <ReviewForm />
+                            <ReviewForm 
+                                reviewsList={this.state.reviewsList} 
+                                getReviews={this.getReviews} 
+                                handleClick={this.handleClick}
+                            />
                         </div>
                    </div>
                 </div>     

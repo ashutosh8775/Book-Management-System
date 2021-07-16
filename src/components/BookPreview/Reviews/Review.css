@@ -80,4 +80,17 @@
   -webkit-box-shadow: none !important;
           box-shadow: none !important;
 }
+
+.review-list .user-wrp p {
+  padding-left: 10px;
+  font-size: 15px;
+}
+
+.review-list i {
+  font-size: 20px;
+}
+
+.review-list .card-title {
+  padding-left: 10px;
+}
 /*# sourceMappingURL=Review.css.map */
