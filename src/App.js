@@ -4,7 +4,6 @@ import Home from './components/Home/homeComponent';
 import Header from './components/Header/headerComponent';
 import Footer from './components/Footer/footerComponent';
 import FormModal from './components/Forms/FormModal';
-import Review from './components/BookPreview/Reviews/Review';
 import BookInfo from './components/BookPreview/BookInfo';
 import {
   BrowserRouter as Router,

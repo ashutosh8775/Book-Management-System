@@ -45,7 +45,7 @@ class Review extends Component {
         const currentPosts =  this.state.reviewsList.slice(indexOfFirstReview, indexOfLastReview);
         
         return ( 
-            <div className="review-section pb-5" ref={this.myRef}>
+            <div className="review-section pb-5 pt-5" ref={this.myRef}>
                <div className="container">
                    <div className="row">
                        <div className="col-lg-8">
