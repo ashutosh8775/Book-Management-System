@@ -46,7 +46,7 @@ class FormModal extends Component {
                         {
                                 this.props.showLoginForm ?  
                                 <Login /> : 
-                                <Register />
+                                <Register switchForms={this.switchForms}/>
                         }
 
                         <div className="footer-txt-wrp text-center pt-3">

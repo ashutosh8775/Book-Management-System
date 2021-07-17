@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import ReactFormInputValidation, { Lang } from "react-form-input-validation";
-
+import axios from "axios";
 class Register extends Component {
     constructor(props){
         super(props);
@@ -8,18 +8,20 @@ class Register extends Component {
         this.state = { 
             fields: {
                 username: '',
-                lastname: '',
                 email: '',
                 mobile_no: '',
-                password: '',
+                password: ''
                 //password_confirmation: ''
             },
             password_confirmation:'',
             errors : '',
-            confirmPasswordErr: ''
+            confirmPasswordErr: '',
+            successMsg: '',
+            errorMsg:''
         }
 
         this.form = new ReactFormInputValidation(this);
+        
         /*TO set custom messages*/
         ReactFormInputValidation.setMessages(Lang.en, {
             required: ':attribute is required.',
@@ -27,28 +29,67 @@ class Register extends Component {
             between: ':attribute must contain minimun 3 and maximum 20 charcters',
             email: 'Please enter valid email address',
             alpha_num: ':attribute must contain alpha numeric characters',
+            alpha_dash: ':attribute can contain only alphabets, numbers, dashes(-) & underscores( _ )',
             min: ':attribute must contain atleast 8 characters',
+            max: ':attribute must contain maximum of 15 characters',
             numeric: ':attribute must contain only digits from 0-9',
-            digits: ':attribute must contain 10 digits',
+            digits: ':attribute must contain 10 digits'
             //confirmed: 'Password did not match'
         });
+
+        /*to create custom password validation*/
+        ReactFormInputValidation.register(
+            "custompassword",
+            function(value, requirement, attribute) {
+                const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])");
+                return value.match(
+                    strongRegex
+                );
+            },
+            "The password must contain atleast 1 uppercase character(A-Z), atleast 1 numeric character (0-9) and one special character(@,#,%,&)"
+        );
 
         this.form.useRules({
             // firstname: "required|alpha|between:3,20",
             // lastname: "required|alpha|between:3,20",
-            username: "required|alpha_num|between:3,20",
+            username: "required|alpha_dash|between:3,20",
             email: "required|email",
             mobile_no: "required|numeric|digits:10",
-            password: "required|alpha_num|min:8",
+            password: "required|min:8|max:15|custompassword",
             //password_confirmation: "required|alpha_num|min:8"
         });
 
         this.form.onformsubmit = (fields) => {
+            this.setState({errorMsg : '', successMsg: ''});
             // Do you ajax calls here.  
-            if(!this.state.confirmPasswordErr){
+            if(this.state.confirmPasswordErr){
                 this.confirmPasswordValidation();
             } else {
-                console.log('field', fields);
+                axios.post("http://localhost:3002/register", {
+                    username: this.state.fields.username,
+                    email: this.state.fields.email,
+                    mobile: this.state.fields.mobile_no,
+                    password: this.state.fields.password,
+                })
+                .then(response => {
+                    if(response.data[0].status == "success") {
+                        //resetting the fields and setting successmessage
+                        this.setState(prevState => ({
+                            fields: {
+                                ...prevState.fields,
+                                username: '',
+                                email: '',
+                                mobile_no: '',
+                                password: ''
+                            },
+                            successMsg: response.data[0].message,
+                            password_confirmation: ''
+                        }));
+                    } else {
+                        this.setState({errorMsg : response.data[0].message});
+                    }
+                })
+                .catch(error => error);
             }
         }
     }
@@ -77,10 +118,22 @@ class Register extends Component {
     render() { 
         return ( 
             <div className="form-wrapper">
+                {
+                    this.state.successMsg ? 
+                    <div class="alert alert-success" role="alert">
+                        {this.state.successMsg}. Click <a href={void(0)} class="alert-link" onClick={() => this.props.switchForms(true)}>here</a> to sign in.
+                    </div> : ''
+                }
+                {
+                    this.state.errorMsg ? 
+                    <div class="alert alert-danger" role="alert">
+                        {this.state.errorMsg}.
+                    </div> : ''
+                }
                 <form onSubmit={this.form.handleSubmit} autoComplete="off">
                     <div className="mb-3">
                         <label htmlFor="username" className="form-label">Username</label>
-                        <input type="text" className="form-control" id="username" name="username" onBlur={this.form.handleBlurEvent} onChange={this.form.handleChangeEvent} value={this.state.fields.username} data-attribute-name="First name" />
+                        <input type="text" className="form-control" id="username" name="username" onBlur={this.form.handleBlurEvent} onChange={this.form.handleChangeEvent} value={this.state.fields.username} data-attribute-name="Username" />
 
                         <small className="error">
                             {this.state.errors.username ? this.state.errors.username : ""}
@@ -96,7 +149,7 @@ class Register extends Component {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="mobile_no" className="form-label">Mobile</label>
-                        <input type="tel" className="form-control" id="mobile_no" name="mobile_no" onBlur={this.form.handleBlurEvent} onChange={this.form.handleChangeEvent} value={this.state.fields.mobile} data-attribute-name="Mobile number"/>
+                        <input type="tel" className="form-control" id="mobile_no" name="mobile_no" onBlur={this.form.handleBlurEvent} onChange={this.form.handleChangeEvent} value={this.state.fields.mobile_no} data-attribute-name="Mobile number"/>
 
                         <small className="error">
                             {this.state.errors.mobile_no ? this.state.errors.mobile_no : ""}
@@ -114,9 +167,6 @@ class Register extends Component {
                         <label htmlFor="password_confirmation" className="form-label">Confirm Password</label>
                         <input type="password" className="form-control" id="password_confirmation" name="password_confirmation" onBlur={this.handleBlur} onChange={this.handleChange} value={this.state.password_confirmation} data-attribute-name="Confirm password"/>
 
-                         {/* <small className="error">
-                            {this.state.errors.password_confirmation  ? this.state.errors.password_confirmation  : ""}
-                        </small> */}
                          <small className="error">
                             {this.state.confirmPasswordErr  ? this.state.confirmPasswordErr  : ""}
                         </small>

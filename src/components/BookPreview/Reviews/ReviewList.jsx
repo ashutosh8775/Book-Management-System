@@ -28,7 +28,7 @@ class ReviewList extends Component {
                                 <div className="card-body">
                                     <div className="user-wrp d-flex align-items-center">
                                         <img src={UserIcon} width="30"/>
-                                        <p className="card-subtitle text-muted mb-0">{item.firstname + ' ' + item.lastname}</p>
+                                        <p className="card-subtitle text-muted mb-0">{item.username}</p>
                                     </div>
                                     <div className="rating-wrp d-flex align-items-center">
                                         <StarRatingComponent 
