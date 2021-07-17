@@ -1,6 +1,54 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Spinner from 'react-bootstrap/Spinner';
+import { useHistory, useParams } from "react-router-dom";
+// import {logo} from "/*.jpg";
 
 // import './home.css';
+// console.log(logo,'logo')
+const imageData = {
+    "data":[
+        {"id":1,"path":"/images/book1.jpg"},
+        {"id":2,"path":"/images/book2.jpg"},
+        {"id":3,"path":"/images/book3.jpg"},
+        {"id":4,"path":"/images/book4.jpg"},
+        {"id":5,"path":"/images/book5.jpg"},
+        {"id":6,"path":"/images/book6.jpg"},
+        {"id":7,"path":"/images/book7.jpg"},
+        {"id":8,"path":"/images/book8.jpg"},
+        {"id":9,"path":"/images/book9.jpg"},
+        {"id":10,"path":"/images/book10.jpg"}
+    ]
+}
 function Home() {
+    const [booksData, getBooks] = useState([]);
+    const [loading,setLoading] = useState(false);
+    let history = useHistory();
+
+    const getData = async () => {
+        setLoading(true)
+        const res = await axios.get("http://localhost:3002/books");
+        let finalData = res.data.output;
+        finalData.forEach(element => {
+            imageData.data.forEach(image => {
+                if(image.id == element.id){            
+                    element.imagePath = image.path;
+                }
+            });
+           
+        });
+        getBooks(finalData);
+        setLoading(false)
+    }
+    useEffect(()=>{
+        getData();
+    },[])
+
+    //redirectTo book preview page
+    function viewBook(book){
+        history.push("/bookPreview"+"/"+book.id);
+    }
+
     return (
             
     <section className="online-courses">
@@ -14,68 +62,27 @@ function Home() {
                     </div>
                 </div>
              </div>
-            <div className="row mt-5">
-                <div className="col-lg-4 col-md-4">
-                    <div className="card online-course-card">
-                    <img src="https://source.unsplash.com/random/600x314" className="img-fluid" alt=""/>
-                    <div className="card-body">
-                        <h3 className="card-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit</h3>
-                        <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo sequi reiciendis</p>
-                        <a href="#" className="btn btn-sm btn-primary">View Book</a>
+             <div className="row mt-5">
+             {loading ? 
+                <Spinner animation="border"/>: 
+                    
+                    booksData.map((book) =>{
+                    return (
+
+                    <div className="col-lg-4 col-md-4" key={book.id} >
+                        <div className="card online-course-card">
+                            <img src={book.imagePath} height="350"/>
+                            <div className="card-body">
+                            <h3 className="card-title">{book.name}</h3>
+                            <p className="card-text">{book.description}</p>
+                            <button type="button" className="btn btn-sm btn-primary" onClick={() => viewBook(book)}>View Book</button>
+                            </div>
+                        </div>
                     </div>
+                        )
+                    })             
+                }
                 </div>
-            </div>
-            <div className="col-lg-4 col-md-4">
-                <div className="card online-course-card">
-                    <img src="https://source.unsplash.com/random/600x314" className="img-fluid" alt=""/>
-                    <div className="card-body">
-                        <h3 className="card-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit</h3>
-                        <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo sequi reiciendis</p>
-                        <a href="#" className="btn btn-sm btn-primary">View Book</a>
-                    </div>
-                </div>
-            </div>
-            <div className="col-lg-4 col-md-4">
-                <div className="card online-course-card">
-                    <img src="https://source.unsplash.com/random/600x314" className="img-fluid" alt=""/>
-                    <div className="card-body">
-                        <h3 className="card-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit</h3>
-                        <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo sequi reiciendis</p>
-                        <a href="#" className="btn btn-sm btn-primary">View Book</a>
-                    </div>
-                </div>
-            </div>
-            <div className="col-lg-4 col-md-4">
-                <div className="card online-course-card">
-                    <img src="https://source.unsplash.com/random/600x314" className="img-fluid" alt=""/>
-                    <div className="card-body">
-                        <h3 className="card-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit</h3>
-                        <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo sequi reiciendis</p>
-                        <a href="#" className="btn btn-sm btn-primary">View Book</a>
-                    </div>
-                </div>
-            </div>
-            <div className="col-lg-4 col-md-4">
-                <div className="card online-course-card">
-                    <img src="https://source.unsplash.com/random/600x314" className="img-fluid" alt=""/>
-                    <div className="card-body">
-                        <h3 className="card-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit</h3>
-                        <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo sequi reiciendis</p>
-                        <a href="#" className="btn btn-sm btn-primary">View Book</a>
-                    </div>
-                </div>
-            </div>
-            <div className="col-lg-4 col-md-4">
-                <div className="card online-course-card">
-                    <img src="https://source.unsplash.com/random/600x314" className="img-fluid" alt=""/>
-                    <div className="card-body">
-                        <h3 className="card-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit</h3>
-                        <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo sequi reiciendis</p>
-                        <a href="#" className="btn btn-sm btn-primary">View Book</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
     );

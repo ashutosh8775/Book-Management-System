@@ -19,7 +19,7 @@ function App() {
       <Router>
                 <Switch>
                     <Route exact path='/' component={Home}></Route>
-                    <Route exact path='/bookpreview' component={BookInfo}></Route>                   
+                    <Route exact path='/bookpreview/:book_id' component={BookInfo}></Route>                
                 </Switch>
             </Router>
       <Footer />
