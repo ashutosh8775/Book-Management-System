@@ -31,6 +31,7 @@ class Register extends Component {
             },
             "The password must contain atleast 1 uppercase character(A-Z), atleast 1 numeric character (0-9) and one special character(@,#,%,&)"
         );
+
         this.form.useRules({
             email_username: "required",
             password: "required|min:8|max:15|custompassword"
@@ -38,12 +39,10 @@ class Register extends Component {
 
         this.form.onformsubmit = (fields) => {
             // Do you ajax calls here.  
-            axios.post("http://localhost:3002/register", {
-                username: this.state.fields.email_username,
-                password: this.state.fields.password
-            })
-            .then(response => {
-                if(response.data[0].status == "success") {
+            axios.post("http://localhost:3002/login/"+this.state.fields.email_username + "/" 
+            + this.state.fields.password)
+            .then(data => {
+                if(data.data.response.status == 0) {
                     //resetting the fields and setting successmessage
                     this.setState(prevState => ({
                         fields: {
@@ -51,10 +50,11 @@ class Register extends Component {
                             email_username: '',
                             password: '',
                         },
-                        successMsg: response.data[0].message,
+                        successMsg: "Logged in Successfully",
                     }));
+                    sessionStorage.setItem("user",JSON.stringify(data.data.response.data))
                 } else {
-                    this.setState({errorMsg : response.data[0].message});
+                    this.setState({errorMsg : data.data[0].message});
                 }
             })
             console.log('field', fields);

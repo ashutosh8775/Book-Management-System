@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Spinner from 'react-bootstrap/Spinner';
 import { useHistory, useParams } from "react-router-dom";
-import StarRatingComponent from 'react-star-rating-component';
 // import {logo} from "/*.jpg";
 
 // import './home.css';
@@ -75,12 +74,6 @@ function Home() {
                             <img src={book.imagePath} height="350"/>
                             <div className="card-body">
                             <h3 className="card-title">{book.name}</h3>
-                            <StarRatingComponent 
-                                name="rating" 
-                                starCount={5}
-                                value={Number(book.avg_ratings)}
-                                editing={false}
-                            />
                             <p className="card-text">{book.description}</p>
                             <button type="button" className="btn btn-sm btn-primary" onClick={() => viewBook(book)}>View Book</button>
                             </div>
