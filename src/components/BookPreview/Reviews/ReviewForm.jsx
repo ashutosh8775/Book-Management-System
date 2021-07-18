@@ -37,16 +37,16 @@ class ReviewForm extends Component {
             let formattedDate = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
             axios.post('http://localhost:3002/addReview', {
                user_id:1,
-               book_id:2,
+               book_id:this.props.book_id,
                review:this.state.description,
                title:this.state.title,
                rating:this.state.rating,
                date: formattedDate
             })
             .then(response => {
-                if(response.data[0].status == "success"){  
+                if(response.data[0].status == "success"){
+                    this.props.calcAvgRating(this.state.rating); //rating is passed to book_info comp to calc avg rating
                     this.setState({title:'', description:'',rating:''});
-                    //this.props.getReviews();
                     let updateReviewList = this.props.reviewsList;
                     updateReviewList.unshift(response.data[0].data[0]);
                     this.props.handleClick(updateReviewList);

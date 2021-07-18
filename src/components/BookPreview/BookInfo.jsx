@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-
+import StarRatingComponent from 'react-star-rating-component';
 
 function BookInfo(){
     const imageData = {
@@ -24,13 +24,13 @@ function BookInfo(){
     const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 3,
-          slidesToSlide: 3 // optional, default to 1.
+          items: 1,
+          slidesToSlide: 1 // optional, default to 1.
         },
         tablet: {
           breakpoint: { max: 1024, min: 464 },
-          items: 2,
-          slidesToSlide: 2 // optional, default to 1.
+          items: 1,
+          slidesToSlide: 1 // optional, default to 1.
         },
         mobile: {
           breakpoint: { max: 464, min: 0 },
@@ -40,6 +40,8 @@ function BookInfo(){
       };
     const [bookInfo, getBookInfo] = useState({});
     const [loading,setLoading] = useState(false);
+    const [avgRating, setAvgRating] = useState({});
+    
     let { book_id } = useParams();
     const getBookData = async () => {
         setLoading(true)
@@ -47,7 +49,15 @@ function BookInfo(){
         let dataObj = res.data.output[0];
         dataObj.imagesArr = imageData.data;
         getBookInfo(dataObj);
+        setAvgRating(dataObj.avg_ratings);
         setLoading(false)
+    }
+
+    const calcAvgRating = (rating) => {
+        let rating_sum = bookInfo.rating_sum + rating;
+	    let rating_count = bookInfo.rating_count + 1;
+	    let avgRatings = Math.round(rating_sum / rating_count);
+        setAvgRating(avgRatings);
     }
     useEffect(()=>{
         getBookData();
@@ -76,7 +86,7 @@ function BookInfo(){
                             >
                             {imageData.data.map(ele =>{
                                 return (
-                                    <img src={ele.path} height="350"/>
+                                    <img src={ele.path} height="350" key={ele.id}/>
                                 )
                                  
                             })}
@@ -87,11 +97,17 @@ function BookInfo(){
                     </div>
                     <div className="col-lg-7 col-md-7">
                         <h3>{bookInfo.name}</h3>
+                        <StarRatingComponent 
+                            name="rating" 
+                            starCount={5}
+                            value={Number(avgRating)}
+                            editing={false}
+                        />
                     <p>{bookInfo.description}</p>
                     </div>
                 </div>
             </div>
-            <Review />
+            <Review book_id = {book_id} calcAvgRating={calcAvgRating}/>
         </div>
     )
 }

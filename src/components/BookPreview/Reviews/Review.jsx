@@ -20,7 +20,7 @@ class Review extends Component {
 
     getReviews = async () => {
         this.setState({loading: true});
-        const res = await axios.get("http://localhost:3002/getReview/2");
+        const res = await axios.get("http://localhost:3002/getReview/" + this.props.book_id);
         this.setState({reviewsList: res.data});
         this.setState({loading: false});
     }
@@ -72,6 +72,8 @@ class Review extends Component {
                                 reviewsList={this.state.reviewsList} 
                                 getReviews={this.getReviews} 
                                 handleClick={this.handleClick}
+                                book_id={this.props.book_id}
+                                calcAvgRating={this.props.calcAvgRating}
                             />
                         </div>
                    </div>

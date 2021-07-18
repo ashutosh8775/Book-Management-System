@@ -9,7 +9,6 @@ class ReviewList extends Component {
     }
     state = {  }
     render() { 
-         console.log("UserIcon",UserIcon);
          if (this.props.loading) {
             return <Loader
                         type="ThreeDots"
@@ -34,7 +33,7 @@ class ReviewList extends Component {
                                         <StarRatingComponent 
                                             name="rating" 
                                             starCount={5}
-                                            value={item.rating}
+                                            value={Number(item.rating)}
                                             editing={false}
                                         />
                                         <h6 className="card-title mb-0">{item.title}</h6>

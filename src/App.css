@@ -176,6 +176,9 @@ section.copy p {
 .mb-0 {
   margin-bottom: 0 !important;
 }
-.mt-10{
-  margin-top:8rem !important;
+.mt-10 {
+  margin-top: 8rem !important;
+}
+.online-courses .dv-star-rating .dv-star-rating-star i {
+  font-size: 18px !important;
 }
