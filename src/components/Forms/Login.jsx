@@ -20,10 +20,20 @@ class Register extends Component {
             alpha_num: ':attribute must contain alpha numeric characters',
             min: ':attribute must contain atleast 8 characters'
         });
-
+        /*to create custom password validation*/
+        ReactFormInputValidation.register(
+            "custompassword",
+            function(value, requirement, attribute) {
+                const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])");
+                return value.match(
+                    strongRegex
+                );
+            },
+            "The password must contain atleast 1 uppercase character(A-Z), atleast 1 numeric character (0-9) and one special character(@,#,%,&)"
+        );
         this.form.useRules({
             email_username: "required",
-            password: "required|alpha_num|min:8"
+            password: "required|min:8|max:15|custompassword"
         });
 
         this.form.onformsubmit = (fields) => {

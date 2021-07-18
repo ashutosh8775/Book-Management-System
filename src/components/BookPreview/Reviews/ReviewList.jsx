@@ -1,7 +1,5 @@
 import React, {Component} from "react";
 import StarRatingComponent from 'react-star-rating-component';
-import Loader from "react-loader-spinner";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import UserIcon from "./user_icon.jpg";
 class ReviewList extends Component {
     constructor(props){
@@ -9,14 +7,6 @@ class ReviewList extends Component {
     }
     state = {  }
     render() { 
-         if (this.props.loading) {
-            return <Loader
-                        type="ThreeDots"
-                        color="#198754"
-                        height={80}
-                        width={80}
-                    />;
-        }
         return ( 
            
             <div className="review-list">

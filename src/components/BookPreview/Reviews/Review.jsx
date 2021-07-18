@@ -4,7 +4,8 @@ import ReviewList from "./ReviewList";
 import ReviewPagination from "./ReviewPagination";
 import axios from "axios"
 import "./Review.css";
-
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 class Review extends Component {
     constructor(props){
@@ -18,16 +19,16 @@ class Review extends Component {
         reviewPerPage: 5
     }
 
-    getReviews = async () => {
+    getReviews = async (book_id) => {
         this.setState({loading: true});
-        const res = await axios.get("http://localhost:3002/getReview/" + this.props.book_id);
-        this.setState({reviewsList: res.data});
-        this.setState({loading: false});
+        return await axios.get("http://localhost:3002/getReview/" + book_id)
+        // this.setState({reviewsList: res.data});
+        // this.setState({loading: false});
+        // return res.data
     }
 
     paginate = (pageNumber) => {
         this.setState({currentPage: pageNumber});
-        console.log('current', this.myRef.current);
         this.myRef.current.scrollIntoView();
     }
 
@@ -36,7 +37,7 @@ class Review extends Component {
     }
 
     componentDidMount(){
-        this.getReviews();
+        this.getReviews(this.props.book_id);
     }
 
     render() { 
@@ -51,9 +52,18 @@ class Review extends Component {
                        <div className="col-lg-8">
                             <h2 class="border-bottom-green pb-2 mb-4">Reviews</h2>
                             {
-                                this.state.reviewsList.length < 1 ?
-                                <h5>No Reviews.</h5> :
-                                <ReviewList reviewList={currentPosts} loading={this.state.loading}/>
+                                !this.state.loading ? 
+                                    <Loader
+                                        type="ThreeDots"
+                                        color="#198754"
+                                        height={60}
+                                        width={60}
+                                    />
+                                :
+                                    this.state.reviewsList.length < 1 ?
+                                        <h5>No Reviews.</h5> 
+                                    :
+                                        <ReviewList reviewList={currentPosts} loading={this.state.loading}/>
                             }
                             
                             {
