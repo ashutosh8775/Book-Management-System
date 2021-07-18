@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import ReactFormInputValidation, { Lang } from "react-form-input-validation";
-
+import axios from "axios";
 class Register extends Component {
     constructor(props){
         super(props);
@@ -28,6 +28,25 @@ class Register extends Component {
 
         this.form.onformsubmit = (fields) => {
             // Do you ajax calls here.  
+            axios.post("http://localhost:3002/register", {
+                username: this.state.fields.email_username,
+                password: this.state.fields.password
+            })
+            .then(response => {
+                if(response.data[0].status == "success") {
+                    //resetting the fields and setting successmessage
+                    this.setState(prevState => ({
+                        fields: {
+                            ...prevState.fields,
+                            email_username: '',
+                            password: '',
+                        },
+                        successMsg: response.data[0].message,
+                    }));
+                } else {
+                    this.setState({errorMsg : response.data[0].message});
+                }
+            })
             console.log('field', fields);
         }
     }
