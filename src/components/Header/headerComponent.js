@@ -5,8 +5,10 @@ import FormModal from "../Forms/FormModal.jsx";
 function Header(){
   const [show, setShow] = useState(false); 
   const [showLoginForm, setshowLoginForm] = useState(true);
+  
   const history = useHistory();
-  const handleOnClick = () => history.push('/');
+  const handleOnClick = () => history.push("/") 
+  const [isLogged,setUserState] = useState(false);
     return (
         <div>
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom_nav">
@@ -29,8 +31,11 @@ function Header(){
                   
                     
                     <div className="d-flex">
-                      <button type="button" className="btn btn-sm btn-success" onClick={() =>setShow(true)}>Sign In</button>
-                      <FormModal show={show} showLoginForm= {showLoginForm} setshowLoginForm={setshowLoginForm} setShow={setShow}/>
+                      { isLogged ? <button type="button" className="btn btn-sm btn-success">Sign Out</button>:
+                        <button type="button" className="btn btn-sm btn-success" onClick={() =>setShow(true)}>Sign In</button>
+                      }
+                      
+                      <FormModal show={show} showLoginForm= {showLoginForm} setshowLoginForm={setshowLoginForm} setShow={setShow} setUserState={setUserState}/>
                     </div>
                   </div>
               </div>

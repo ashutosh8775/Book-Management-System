@@ -1,7 +1,7 @@
 import React,{Component} from "react";
 import ReactFormInputValidation, { Lang } from "react-form-input-validation";
 import axios from "axios";
-class Register extends Component {
+class Login extends Component {
     constructor(props){
         super(props);
 
@@ -52,7 +52,9 @@ class Register extends Component {
                         },
                         successMsg: "Logged in Successfully",
                     }));
-                    sessionStorage.setItem("user",JSON.stringify(data.data.response.data))
+                    sessionStorage.setItem("user",JSON.stringify(data.data.response.data));
+                    this.props.handleClose();
+                    this.props.setUserState(true);
                 } else {
                     this.setState({errorMsg : data.data[0].message});
                 }
@@ -91,4 +93,4 @@ class Register extends Component {
     }
 }
  
-export default Register;
+export default Login;
