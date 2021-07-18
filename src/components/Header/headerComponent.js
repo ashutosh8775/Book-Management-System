@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useHistory, useParams } from "react-router-dom";
 import FormModal from "../Forms/FormModal.jsx";
+
 function Header(){
   const [show, setShow] = useState(false); 
   const [showLoginForm, setshowLoginForm] = useState(true);
-
+  const history = useHistory();
+  const handleOnClick = () => history.push('/');
     return (
         <div>
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom_nav">
               <div className="container">
-                  <a className="navbar-brand" href="#">Book Review System</a>
+                  <a className="navbar-brand" href="" onClick={handleOnClick}>Book Review System</a>
                   
                   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -26,7 +29,7 @@ function Header(){
                   
                     
                     <div className="d-flex">
-                      <button type="button" className="btn btn-sm btn-success" onClick={() =>setShow(true)}>Sign In / Sign Up</button>
+                      <button type="button" className="btn btn-sm btn-success" onClick={() =>setShow(true)}>Sign In</button>
                       <FormModal show={show} showLoginForm= {showLoginForm} setshowLoginForm={setshowLoginForm} setShow={setShow}/>
                     </div>
                   </div>

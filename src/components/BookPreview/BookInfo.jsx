@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef  } from "react";
 import Review from './Reviews/Review';
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -7,6 +7,7 @@ import 'react-multi-carousel/lib/styles.css';
 import StarRatingComponent from 'react-star-rating-component';
 
 function BookInfo(){
+    const myRef = useRef();
     const imageData = {
         "data":[
             {"id":1,"path":"/images/book1.jpg"},
@@ -61,16 +62,17 @@ function BookInfo(){
     }
     useEffect(()=>{
         getBookData();
+        myRef.current.scrollIntoView();
     },[])
     return (
-        <div className="wrapper">
+        <div className="wrapper" ref={myRef}>
             <div className="container">
                 <div className="row mt-10">
                     <div className="col-lg-5 col-md-5">
                         <div className="online-course-card">
                         <Carousel
                             swipeable={false}
-                            draggable={false}
+                            draggable={true}
                             showDots={true}
                             responsive={responsive}
                             ssr={true} // means to render carousel on server-side.
@@ -97,6 +99,7 @@ function BookInfo(){
                     </div>
                     <div className="col-lg-7 col-md-7">
                         <h3>{bookInfo.name}</h3>
+                        <div><i>by {bookInfo.author_name}</i></div>
                         <StarRatingComponent 
                             name="rating" 
                             starCount={5}
