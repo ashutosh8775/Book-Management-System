@@ -43,6 +43,10 @@ class ReviewForm extends Component {
                title:this.state.title,
                rating:this.state.rating,
                date: formattedDate
+            }, {
+               "headers" : {
+                   "Authorization" : JSON.parse(sessionStorage.getItem("user")).accessToken  
+               } 
             })
             .then(response => {
                 if(response.data[0].status == "success"){

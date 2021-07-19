@@ -41,7 +41,9 @@ function BookInfo(){
     const [bookInfo, getBookInfo] = useState({});
     const [loading,setLoading] = useState(false);
     const [avgRating, setAvgRating] = useState({});
-    
+    const [initialRatingSum, setInitialRatingSum] = useState(0);
+    const [initialRatingCount, setInitialRatingCount] = useState(0);
+
     let { book_id } = useParams();
     const getBookData = async () => {
         setLoading(true)
@@ -50,14 +52,19 @@ function BookInfo(){
         dataObj.imagesArr = imageData.data;
         getBookInfo(dataObj);
         setAvgRating(dataObj.avg_ratings);
+        setInitialRatingSum(dataObj.rating_sum);
+        setInitialRatingCount(dataObj.rating_count);
         setLoading(false)
     }
 
     const calcAvgRating = (rating) => {
-        let rating_sum = bookInfo.rating_sum + rating;
-	    let rating_count = bookInfo.rating_count + 1;
-	    let avgRatings = Math.round(rating_sum / rating_count);
+        console.log("bookInfo", bookInfo);
+        let ratingSum = initialRatingSum + rating;
+	    let ratingCount = initialRatingCount + 1;
+	    let avgRatings = Math.round(ratingSum / ratingCount);
         setAvgRating(avgRatings);
+        setInitialRatingSum(ratingSum);
+        setInitialRatingCount(ratingCount);
     }
     useEffect(()=>{
         getBookData();
