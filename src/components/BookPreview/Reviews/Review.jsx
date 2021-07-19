@@ -19,12 +19,22 @@ class Review extends Component {
         reviewPerPage: 5
     }
 
-    getReviews = async (book_id) => {
+    getReviews = (book_id) => {
         this.setState({loading: true});
-        return await axios.get("http://localhost:3002/getReview/" + book_id)
-        // this.setState({reviewsList: res.data});
+        //return await axios.get("http://localhost:3002/getReview/" + book_id)
+        //this.setState({reviewsList: res.data});
         // this.setState({loading: false});
         // return res.data
+        return fetch('http://localhost:3002/getReview' + "/" + book_id)
+        .then(response => { return response.json();})
+        .then(data => {
+            this.setState({reviewsList: data});
+            this.setState({loading: false});
+            return data;
+        })
+        .catch(err => {
+            return err;
+        })
     }
 
     paginate = (pageNumber) => {
@@ -52,7 +62,7 @@ class Review extends Component {
                        <div className="col-lg-8">
                             <h2 class="border-bottom-green pb-2 mb-4">Reviews</h2>
                             {
-                                !this.state.loading ? 
+                                this.state.loading ? 
                                     <Loader
                                         type="ThreeDots"
                                         color="#198754"
