@@ -45,7 +45,7 @@ class FormModal extends Component {
                         </div>
                         {
                                 this.props.showLoginForm ?  
-                                <Login handleClose={this.handleClose} setUserState={this.props.setUserState}/> : 
+                                <Login handleClose={this.handleClose} setUserState={this.props.setUserState} getUserData ={this.props.getUserData}/> : 
                                 <Register switchForms={this.switchForms}/>
                         }
 

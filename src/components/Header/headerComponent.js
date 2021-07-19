@@ -1,14 +1,26 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import FormModal from "../Forms/FormModal.jsx";
-
+import UserIcon from "./user_icon.jpg";
 function Header(){
   const [show, setShow] = useState(false); 
   const [showLoginForm, setshowLoginForm] = useState(true);
-  
+  // let userData = sessionStorage.getItem("user");
   const history = useHistory();
   const handleOnClick = () => history.push("/") 
   const [isLogged,setUserState] = useState(false);
+  const [userData,getUserData] = useState('');
+  const logOut = () =>{
+    sessionStorage.removeItem("user");
+    setUserState(false);
+    window.location.reload(false);
+  }
+//   useEffect(()=>{
+//     console.log('heyy')
+//     getUserData(sessionStorage.getItem("user"));
+//     console.log(userData,'jj')
+// },[])
+  // getUserData(sessionStorage.getItem("user"));
     return (
         <div>
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom_nav">
@@ -31,11 +43,21 @@ function Header(){
                   
                     
                     <div className="d-flex">
-                      { isLogged ? <button type="button" className="btn btn-sm btn-success">Sign Out</button>:
+                      { isLogged ||  sessionStorage.getItem("user") != undefined? 
+                      <ul className="list-group list-group-horizontal remove-bullet">
+                        <li>
+                        <img src={UserIcon} width="30"/>
+                        <span className="user-stl">{JSON.parse(sessionStorage.getItem("user")).username}</span>
+                        </li>
+                        <li>
+                        <button type="button" className="btn btn-sm btn-success" onClick={logOut}>Sign Out</button>
+                        </li>
+                      </ul>
+                      :
                         <button type="button" className="btn btn-sm btn-success" onClick={() =>setShow(true)}>Sign In</button>
                       }
                       
-                      <FormModal show={show} showLoginForm= {showLoginForm} setshowLoginForm={setshowLoginForm} setShow={setShow} setUserState={setUserState}/>
+                      <FormModal show={show} showLoginForm= {showLoginForm} setshowLoginForm={setshowLoginForm} setShow={setShow} setUserState={setUserState} getUserData ={getUserData}/>
                     </div>
                   </div>
               </div>

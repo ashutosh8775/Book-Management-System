@@ -55,6 +55,7 @@ class Login extends Component {
                     sessionStorage.setItem("user",JSON.stringify(data.data.response.data));
                     this.props.handleClose();
                     this.props.setUserState(true);
+                    this.props.getUserData(data.data.response.data);
                 } else {
                     this.setState({errorMsg : data.data[0].message});
                 }
