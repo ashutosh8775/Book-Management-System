@@ -5,7 +5,6 @@ import axios from "axios";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import StarRatingComponent from 'react-star-rating-component';
-
 function BookInfo(){
     const myRef = useRef();
     const imageData = {

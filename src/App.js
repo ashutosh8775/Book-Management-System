@@ -15,14 +15,16 @@ import {
 function App() {
   return (
     <div>
-      <Header />
+     
       <Router>
+        <Header />
                 <Switch>
                     <Route exact path='/' component={Home}></Route>
                     <Route exact path='/bookpreview/:book_id' component={BookInfo}></Route>                
                 </Switch>
-            </Router>
-      <Footer />
+              <Footer />
+      </Router>
+    
     </div>
   );
 }
