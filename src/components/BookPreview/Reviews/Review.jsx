@@ -51,6 +51,7 @@ class Review extends Component {
     }
 
     render() { 
+        console.log(sessionStorage.getItem("user"));
         const indexOfLastReview = this.state.currentPage * this.state.reviewPerPage;
         const indexOfFirstReview = indexOfLastReview - this.state.reviewPerPage;
         const currentPosts =  this.state.reviewsList.slice(indexOfFirstReview, indexOfLastReview);

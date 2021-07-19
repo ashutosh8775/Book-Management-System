@@ -12,6 +12,7 @@ class ReviewForm extends Component {
             description: '',
             ratingErrMsg: '',
             descErrMsg: '',
+            isLoggedIn: sessionStorage.getItem("user")? true :false
         }
     }
     onStarClick = (nextValue, prevValue, name) => {
@@ -36,7 +37,7 @@ class ReviewForm extends Component {
             let date = new Date();
             let formattedDate = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
             axios.post('http://localhost:3002/addReview', {
-               user_id:1,
+               user_id:JSON.parse(sessionStorage.getItem("user")).id,
                book_id:this.props.book_id,
                review:this.state.description,
                title:this.state.title,
@@ -48,6 +49,7 @@ class ReviewForm extends Component {
                     this.props.calcAvgRating(this.state.rating); //rating is passed to book_info comp to calc avg rating
                     this.setState({title:'', description:'',rating:''});
                     let updateReviewList = this.props.reviewsList;
+                    response.data[0].data[0].username = JSON.parse(sessionStorage.getItem("user")).username;
                     updateReviewList.unshift(response.data[0].data[0]);
                     this.props.handleClick(updateReviewList);
                 } else {
@@ -70,39 +72,45 @@ class ReviewForm extends Component {
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey="0">
                         <Card.Body>
-                            <form onSubmit={this.handleFormSubmit} autoComplete="off">
-                                 <div className="mb-1 form-star-wrapper">
-                                    <label className="form-label">Add your rating</label>
-                                    <StarRatingComponent 
-                                        name="rating" 
-                                        starCount={5}
-                                        value={this.state.rating}
-                                        onStarClick={this.onStarClick}
-                                    />
-                                    <small className="error">
-                                        {this.state.ratingErrMsg ? this.state.ratingErrMsg : ""}
-                                    </small>
-                                </div>
-                                
-                                <div className="mb-3">
-                                    <label htmlFor="description" className="form-label">Add a written review</label>
-                                    <textarea type="text" className="form-control" id="description" placeholder="What did you like or dislike?" name="description" onChange={this.handleInputChange} rows="5" value={this.state.description}/>
-
-                                    <small className="error">
-                                        {this.state.descErrMsg ? this.state.descErrMsg : ""}
-                                    </small>
-                                </div>
+                            {
+                                this.state.isLoggedIn ? 
                             
-                                <div className="mb-3">
-                                    <label htmlFor="title" className="form-label">Add a title</label>
-                                    <input type="text" className="form-control" id="title" name="title" placeholder="Sum up your review in one line" onChange={this.handleInputChange} value={this.state.title}/>
+                                <form onSubmit={this.handleFormSubmit} autoComplete="off">
+                                    <div className="mb-1 form-star-wrapper">
+                                        <label className="form-label">Add your rating</label>
+                                        <StarRatingComponent 
+                                            name="rating" 
+                                            starCount={5}
+                                            value={this.state.rating}
+                                            onStarClick={this.onStarClick}
+                                        />
+                                        <small className="error">
+                                            {this.state.ratingErrMsg ? this.state.ratingErrMsg : ""}
+                                        </small>
+                                    </div>
+                                    
+                                    <div className="mb-3">
+                                        <label htmlFor="description" className="form-label">Add a written review</label>
+                                        <textarea type="text" className="form-control" id="description" placeholder="What did you like or dislike?" name="description" onChange={this.handleInputChange} rows="5" value={this.state.description}/>
 
-                                    {/* <small className="error">
-                                        {this.state.errors.title ? this.state.errors.title : ""}
-                                    </small> */}
-                                </div>
-                                <button type="submit" className="btn btn-success mt-3">Submit</button>
-                            </form>
+                                        <small className="error">
+                                            {this.state.descErrMsg ? this.state.descErrMsg : ""}
+                                        </small>
+                                    </div>
+                                
+                                    <div className="mb-3">
+                                        <label htmlFor="title" className="form-label">Add a title</label>
+                                        <input type="text" className="form-control" id="title" name="title" placeholder="Sum up your review in one line" onChange={this.handleInputChange} value={this.state.title}/>
+
+                                        {/* <small className="error">
+                                            {this.state.errors.title ? this.state.errors.title : ""}
+                                        </small> */}
+                                    </div>
+                                    <button type="submit" className="btn btn-success mt-3">Submit</button>
+                                </form>
+
+                                : <p className="mb-0"> Please sign in to post a review</p>
+                            }
                         </Card.Body>
                     </Accordion.Collapse>
                    

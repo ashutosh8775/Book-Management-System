@@ -10,7 +10,8 @@ class Login extends Component {
                 email_username: '',
                 password: ''
             },
-            errors : ''
+            errors : '',
+            errorMsg:''
         }
 
         this.form = new ReactFormInputValidation(this);
@@ -42,31 +43,37 @@ class Login extends Component {
             axios.post("http://localhost:3002/login/"+this.state.fields.email_username + "/" 
             + this.state.fields.password)
             .then(data => {
-                if(data.data.response.status == 0) {
+                if(data.data.response.status == "success") {
                     //resetting the fields and setting successmessage
                     this.setState(prevState => ({
                         fields: {
                             ...prevState.fields,
                             email_username: '',
                             password: '',
-                        },
-                        successMsg: "Logged in Successfully",
+                        }
                     }));
                     sessionStorage.setItem("user",JSON.stringify(data.data.response.data));
                     this.props.handleClose();
                     this.props.setUserState(true);
                     this.props.getUserData(data.data.response.data);
+                    window.location.reload();
                 } else {
-                    this.setState({errorMsg : data.data[0].message});
+                    this.setState({errorMsg : data.data.response.message});
                 }
             })
-            console.log('field', fields);
+            .catch(error => error);
         }
     }
         
     render() { 
         return ( 
             <div className="form-wrapper">
+                {
+                    this.state.errorMsg ? 
+                    <div class="alert alert-danger" role="alert">
+                        {this.state.errorMsg}.
+                    </div> : ''
+                }
                 <form onSubmit={this.form.handleSubmit} autoComplete="off">
                     
                     <div className="mb-3">
