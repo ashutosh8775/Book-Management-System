@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`header Component Check Ui is loaded or not 1`] = `ShallowWrapper {}`;

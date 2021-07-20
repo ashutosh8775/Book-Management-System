@@ -2,7 +2,11 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import FormModal from "../Forms/FormModal.jsx";
 import UserIcon from "./user_icon.jpg";
-function Header(){
+import { connect } from 'react-redux';
+import { previewDetails } from "../action";
+
+
+function Header(props){
   const [show, setShow] = useState(false); 
   const [showLoginForm, setshowLoginForm] = useState(true);
   // let userData = sessionStorage.getItem("user");
@@ -15,6 +19,11 @@ function Header(){
     setUserState(false);
     window.location.reload(false);
   }
+  const searchHandler = (event) =>{
+    let data = event.target.value;
+    props.previewDetails(data);
+  }
+  
 //   useEffect(()=>{
 //     console.log('heyy')
 //     getUserData(sessionStorage.getItem("user"));
@@ -26,7 +35,11 @@ function Header(){
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom_nav">
               <div className="container">
                   <a className="navbar-brand" href="" onClick={handleOnClick}>Book Review System</a>
-                  
+                  <div>
+                  <input type="text" className="form-control" onChange ={searchHandler}/>
+                  </div>
+                  <div className="user-stl ">redux: {props.BookData}</div>
+                 
                   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                   </button>
@@ -66,8 +79,18 @@ function Header(){
                   </div>
               </div>
           </nav>
+          
         </div>
     )
 }
-
-export default Header;
+const mapDispatchToProps = dispatch => {
+  return {
+      previewDetails: data => dispatch(previewDetails(data))
+  }
+}
+const mapStateToProps = state => {
+  return {
+    BookData:state.BookData
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -3,6 +3,8 @@ import axios from "axios";
 import Spinner from 'react-bootstrap/Spinner';
 import { useHistory, useParams } from "react-router-dom";
 import StarRatingComponent from 'react-star-rating-component';
+import { connect } from 'react-redux';
+import { previewDetails } from "../action";
 // import {logo} from "/*.jpg";
 
 // import './home.css';
@@ -21,7 +23,7 @@ const imageData = {
         {"id":10,"path":"/images/book10.jpg"}
     ]
 }
-function Home() {
+function Home(props) {
     const [booksData, getBooks] = useState([]);
     const [loading,setLoading] = useState(false);
     let history = useHistory();
@@ -59,6 +61,7 @@ function Home() {
                 <div className="col-lg-6 col-md-6">
                     <div className="online-courses-text-widget">
                         <h2>Online Books</h2>
+                        {/* <div className="user-stl ">redux: {props.BookData}</div> */}
                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit minus delectus error possimus vitae dolorum odio aliquam! Veritatis eos, nesciunt velit saepe quis, numquam sed nisi consequatur recusandae, atque quasi.</p>
                         <a href="#" className="btn btn-warning btn-sm">Popular Books</a>
                     </div>
@@ -95,5 +98,9 @@ function Home() {
 </section>
     );
 }
-
-export default Home;
+const mapStateToProps = state => {
+    return {
+      BookData:state.BookData
+    }
+  }
+  export default connect(mapStateToProps)(Home);

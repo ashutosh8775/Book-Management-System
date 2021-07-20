@@ -12,9 +12,11 @@ import {
   Link
 } from 'react-router-dom';
 import 'font-awesome/css/font-awesome.min.css';
-
+import store from './components/store';
+import { Provider } from 'react-redux'
 function App() {
   return (
+    <Provider store = {store}>
     <div>
      
       <Router>
@@ -27,6 +29,7 @@ function App() {
       </Router>
     
     </div>
+    </Provider>
   );
 }
 
