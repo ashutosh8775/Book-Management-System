@@ -45,8 +45,12 @@ function Header(){
                     <div className="d-flex">
                       { isLogged ||  sessionStorage.getItem("user") != undefined? 
                       <ul className="list-group list-group-horizontal remove-bullet">
-                        <li>
-                        <img src={UserIcon} width="30"/>
+                        <li className="d-flex align-items-center">
+                        
+                        <span className="user-icon-h d-flex align-items-center justify-content-center">  
+                          <i className="fa fa-user-o"></i>
+                        </span>
+                         
                         <span className="user-stl">{JSON.parse(sessionStorage.getItem("user")).username}</span>
                         </li>
                         <li>

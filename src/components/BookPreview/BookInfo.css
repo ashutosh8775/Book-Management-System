@@ -1,0 +1,15 @@
+.book-info-rhs .author_wrap {
+  border-bottom: 1px solid #efefef;
+  padding-bottom: 15px;
+}
+
+.book-info-rhs .dv-star-rating {
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  font-size: 24px;
+}
+
+.book-info-rhs .book-desc {
+  border-top: 1px solid #efefef;
+}
+/*# sourceMappingURL=BookInfo.css.map */

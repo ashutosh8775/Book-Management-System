@@ -5,6 +5,8 @@ import axios from "axios";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import StarRatingComponent from 'react-star-rating-component';
+import "./BookInfo.css";
+
 function BookInfo(){
     const myRef = useRef();
     const imageData = {
@@ -58,7 +60,6 @@ function BookInfo(){
     }
 
     const calcAvgRating = (rating) => {
-        console.log("bookInfo", bookInfo);
         let ratingSum = initialRatingSum + rating;
 	    let ratingCount = initialRatingCount + 1;
 	    let avgRatings = Math.round(ratingSum / ratingCount);
@@ -103,16 +104,16 @@ function BookInfo(){
                         {/* <img src="https://source.unsplash.com/random/600x314" className="img-fluid" alt=""/> */}
                         </div>
                     </div>
-                    <div className="col-lg-7 col-md-7">
+                    <div className="col-lg-7 col-md-7 book-info-rhs">
                         <h3>{bookInfo.name}</h3>
-                        <div><i>by {bookInfo.author_name}</i></div>
+                        <div className="author-wrap border-bottom pb-3"><i>by {bookInfo.author_name}</i></div>
                         <StarRatingComponent 
                             name="rating" 
                             starCount={5}
                             value={Number(avgRating)}
                             editing={false}
                         />
-                    <p>{bookInfo.description}</p>
+                    <p className="pt-3 book-desc">{bookInfo.description}</p>
                     </div>
                 </div>
             </div>
