@@ -4,8 +4,8 @@ import FormModal from "../Forms/FormModal.jsx";
 import { connect } from 'react-redux';
 import { previewDetails } from "../action";
 
-
 function Header(props){
+
   const [show, setShow] = useState(false); 
   const [showLoginForm, setshowLoginForm] = useState(true);
   const history = useHistory();
@@ -18,23 +18,18 @@ function Header(props){
     let data = event.target.value;
     props.previewDetails(data);
   }
-  
-//   useEffect(()=>{
-//     console.log('heyy')
-//     getUserData(sessionStorage.getItem("user"));
-//     console.log(userData,'jj')
-// },[])
-  // getUserData(sessionStorage.getItem("user"));
+
     return (
         <div>
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom_nav">
               <div className="container">
-                  <a className="navbar-brand" href="" onClick={handleOnClick}>Book Review System</a>
-                  <div>
-                  <input type="text" className="form-control" onChange ={searchHandler}/>
-                  </div>
-                  <div className="user-stl ">redux: {props.BookData}</div>
-                 
+                  <h4 className="navbar-left color-text" onClick={handleOnClick}>Book Review System</h4>
+                  {/* <div></div> */}
+                  <div class="col-lg-4 col-md-4">
+                    <div class="input-group mb-1 ml-5">
+                        <input type="search" class="form-control form-control-sm" placeholder="Search by book name..." aria-label="Recipient's username" aria-describedby="button-addon2" onChange={searchHandler}/>
+                    </div>
+            </div>
                   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                   </button>
@@ -74,18 +69,18 @@ function Header(props){
                   </div>
               </div>
           </nav>
-          
         </div>
     )
 }
+
 const mapDispatchToProps = dispatch => {
   return {
       previewDetails: data => dispatch(previewDetails(data))
   }
 }
-const mapStateToProps = state => {
-  return {
-    BookData:state.BookData
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+// const mapStateToProps = state => {
+//   return {
+//     BookData:state.BookData
+//   }
+// }
+export default connect(null, mapDispatchToProps)(Header);

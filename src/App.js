@@ -14,8 +14,6 @@ import { Provider } from 'react-redux'
 function App() {
   return (
     <Provider store = {store}>
-    <div>
-     
       <Router>
         <Header />
                 <Switch>
@@ -24,8 +22,6 @@ function App() {
                 </Switch>
               <Footer />
       </Router>
-    
-    </div>
     </Provider>
   );
 }
