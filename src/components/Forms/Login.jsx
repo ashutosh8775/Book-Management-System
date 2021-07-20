@@ -70,7 +70,7 @@ class Login extends Component {
             <div className="form-wrapper">
                 {
                     this.state.errorMsg ? 
-                    <div class="alert alert-danger" role="alert">
+                    <div className="alert alert-danger" role="alert">
                         {this.state.errorMsg}.
                     </div> : ''
                 }

@@ -71,9 +71,9 @@ function Home() {
                     booksData.map((book) =>{
                     return (
 
-                    <div className="col-lg-4 col-md-4" key={book.id} >
+                    <div className="col-lg-3 col-md-6 col-sm-6" key={book.id} >
                         <div className="card online-course-card">
-                            <img src={book.imagePath} height="350"/>
+                            <img src={book.imagePath} height="300"/>
                             <div className="card-body">
                             <h3 className="card-title">{book.name}</h3>
                             <StarRatingComponent 
@@ -83,7 +83,7 @@ function Home() {
                                 editing={false}
                             />
                             <p className="card-text">{book.description}</p>
-                            <button type="button" className="btn btn-sm btn-primary" onClick={() => viewBook(book)}>View Book</button>
+                            <button type="button" className="btn btn-sm btn-success" onClick={() => viewBook(book)}>View Book</button>
                             </div>
                         </div>
                     </div>

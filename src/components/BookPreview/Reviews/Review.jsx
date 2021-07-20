@@ -12,6 +12,7 @@ class Review extends Component {
         super(props);
         this.myRef = React.createRef();
     }
+
     state = { 
         reviewsList : [],
         loading: false,
@@ -21,10 +22,6 @@ class Review extends Component {
 
     getReviews = (book_id) => {
         this.setState({loading: true});
-        //return await axios.get("http://localhost:3002/getReview/" + book_id)
-        //this.setState({reviewsList: res.data});
-        // this.setState({loading: false});
-        // return res.data
         return fetch('http://localhost:3002/getReview' + "/" + book_id)
         .then(response => { return response.json();})
         .then(data => {
@@ -60,7 +57,7 @@ class Review extends Component {
                <div className="container">
                    <div className="row">
                        <div className="col-lg-8">
-                            <h2 class="border-bottom-green pb-2 mb-4">Reviews</h2>
+                            <h2 className="border-bottom-green pb-2 mb-4">Reviews</h2>
                             {
                                 this.state.loading ? 
                                     <Loader
@@ -73,7 +70,7 @@ class Review extends Component {
                                     this.state.reviewsList.length < 1 ?
                                         <h5>No Reviews.</h5> 
                                     :
-                                        <ReviewList reviewList={currentPosts} loading={this.state.loading}/>
+                                        <ReviewList reviewList={currentPosts}/>
                             }
                             
                             {

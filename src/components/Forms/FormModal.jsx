@@ -8,7 +8,6 @@ class FormModal extends Component {
     constructor(props) {
         super(props);
         this.state = { }
-        console.log('props==', props);
     }
 
     handleClose = () => {
@@ -34,7 +33,7 @@ class FormModal extends Component {
                     <Modal.Body>
                         <div className="title pb-3">
                             {/* <div className="user-icon">
-                                <i class="fa fa-user"></i>
+                                <i className="fa fa-user"></i>
                             </div> */}
                             <h3 className="text-center">
                                 {

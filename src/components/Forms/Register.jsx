@@ -120,13 +120,13 @@ class Register extends Component {
             <div className="form-wrapper">
                 {
                     this.state.successMsg ? 
-                    <div class="alert alert-success" role="alert">
-                        {this.state.successMsg}. Click <a href={void(0)} class="alert-link" onClick={() => this.props.switchForms(true)}>here</a> to sign in.
+                    <div className="alert alert-success" role="alert">
+                        {this.state.successMsg}. Click <a href={void(0)} className="alert-link" onClick={() => this.props.switchForms(true)} style={{"cursor":"pointer"}}>here</a> to sign in.
                     </div> : ''
                 }
                 {
                     this.state.errorMsg ? 
-                    <div class="alert alert-danger" role="alert">
+                    <div className="alert alert-danger" role="alert">
                         {this.state.errorMsg}.
                     </div> : ''
                 }
