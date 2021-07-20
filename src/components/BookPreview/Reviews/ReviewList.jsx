@@ -2,9 +2,6 @@ import React, {Component} from "react";
 import StarRatingComponent from 'react-star-rating-component';
 import UserIcon from "./user_icon.jpg";
 class ReviewList extends Component {
-    constructor(props){
-        super(props);
-    }
     state = {  }
     render() { 
         return ( 
@@ -16,7 +13,7 @@ class ReviewList extends Component {
                             <div className="card mb-3" key={item.id}>
                                 <div className="card-body">
                                     <div className="user-wrp d-flex align-items-center">
-                                        <img src={UserIcon} width="30"/>
+                                        <img src={UserIcon} width="30" alt=""/>
                                         <p className="card-subtitle text-muted mb-0">{item.username}</p>
                                     </div>
                                     <div className="rating-wrp d-flex align-items-center">

@@ -1,15 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
 import Home from './components/Home/homeComponent';
 import Header from './components/Header/headerComponent';
 import Footer from './components/Footer/footerComponent';
-import FormModal from './components/Forms/FormModal';
-import BookInfo from './components/BookPreview/BookInfo';
+import BookInfo from './components/BookPreview/BookInfo/BookInfo';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
 import 'font-awesome/css/font-awesome.min.css';
 

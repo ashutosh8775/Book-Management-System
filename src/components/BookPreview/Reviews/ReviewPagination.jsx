@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 const ReviewPagination = ({ reviewPerPage, totalReview, paginate, currentPage }) => {
    const pageNumbers = [];
@@ -20,7 +20,7 @@ const ReviewPagination = ({ reviewPerPage, totalReview, paginate, currentPage })
                 {
                     pageNumbers.map(number => (
                         <li key={number} className="page-item" attr={number}>
-                            <button onClick={() => paginate(number)} className={currentPage == number ? "page-link active" : "page-link"}  >
+                            <button onClick={() => paginate(number)} className={currentPage === number ? "page-link active" : "page-link"}  >
                             {number}
                             </button>
                         </li>

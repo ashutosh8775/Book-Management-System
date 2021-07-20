@@ -40,8 +40,11 @@ class Login extends Component {
 
         this.form.onformsubmit = (fields) => {
             // Do you ajax calls here.  
-            axios.post("http://localhost:3002/login/"+this.state.fields.email_username + "/" 
-            + this.state.fields.password)
+            let data = {
+                email_username : this.state.fields.email_username,
+                password : this.state.fields.password
+            }
+            axios.post("http://localhost:3002/login/", data)
             .then(data => {
                 if(data.data.response.status == "success") {
                     //resetting the fields and setting successmessage
@@ -53,9 +56,6 @@ class Login extends Component {
                         }
                     }));
                     sessionStorage.setItem("user",JSON.stringify(data.data.response.data));
-                    this.props.handleClose();
-                    this.props.setUserState(true);
-                    this.props.getUserData(data.data.response.data);
                     window.location.reload();
                 } else {
                     this.setState({errorMsg : data.data.response.message});
