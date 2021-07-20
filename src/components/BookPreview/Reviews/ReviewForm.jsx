@@ -26,11 +26,11 @@ class ReviewForm extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        if(this.state.rating < 1 && this.state.description == ''){
+        if(this.state.rating < 1 && this.state.description === ''){
              this.setState({ratingErrMsg: 'Rating is required', descErrMsg:'Review Description in required'});
         } else if(this.state.rating < 1){
             this.setState({ratingErrMsg: 'Rating is required'});
-        } else if (this.state.description == ''){
+        } else if (this.state.description === ''){
             this.setState({descErrMsg:'Review Description in required'});
         } else {
             //api call will come here
@@ -49,7 +49,7 @@ class ReviewForm extends Component {
                } 
             })
             .then(response => {
-                if(response.data[0].status == "success"){
+                if(response.data[0].status === "success"){
                     this.props.calcAvgRating(this.state.rating); //rating is passed to book_info comp to calc avg rating
                     this.setState({title:'', description:'',rating:''});
                     let updateReviewList = this.props.reviewsList;

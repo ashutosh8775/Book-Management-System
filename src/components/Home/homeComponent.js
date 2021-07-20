@@ -48,7 +48,6 @@ function Home(props) {
     },[])
 
     //redirectTo book preview page
-    console.log(history,'ll');
     function viewBook(book){
         history.push("/bookPreview"+"/"+book.id);
     }

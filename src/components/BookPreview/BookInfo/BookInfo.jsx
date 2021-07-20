@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef  } from "react";
-import Review from './Reviews/Review';
+import Review from '../Reviews/Review';
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Carousel from 'react-multi-carousel';

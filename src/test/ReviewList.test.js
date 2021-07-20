@@ -32,6 +32,5 @@ describe('ReviewList Component', ()=>{
         ];
         const wrapper = shallow(<ReviewList reviewList={reviewList} />);
         expect(wrapper.find('div.card').length).toBe(reviewList.length);
-        
     });
 })

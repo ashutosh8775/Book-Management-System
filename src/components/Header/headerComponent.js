@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import FormModal from "../Forms/FormModal.jsx";
-import UserIcon from "./user_icon.jpg";
 import { connect } from 'react-redux';
 import { previewDetails } from "../action";
 
@@ -9,14 +8,10 @@ import { previewDetails } from "../action";
 function Header(props){
   const [show, setShow] = useState(false); 
   const [showLoginForm, setshowLoginForm] = useState(true);
-  // let userData = sessionStorage.getItem("user");
   const history = useHistory();
-  const handleOnClick = () => history.push("/") 
-  const [isLogged,setUserState] = useState(false);
-  const [userData,getUserData] = useState('');
+  const handleOnClick = () => history.push("/");
   const logOut = () =>{
     sessionStorage.removeItem("user");
-    setUserState(false);
     window.location.reload(false);
   }
   const searchHandler = (event) =>{
@@ -56,7 +51,7 @@ function Header(props){
                   
                     
                     <div className="d-flex">
-                      { isLogged ||  sessionStorage.getItem("user") != undefined? 
+                      { sessionStorage.getItem("user") != undefined ? 
                       <ul className="list-group list-group-horizontal remove-bullet">
                         <li className="d-flex align-items-center">
                         
@@ -74,7 +69,7 @@ function Header(props){
                         <button type="button" className="btn btn-sm btn-success" onClick={() =>setShow(true)}>Sign In</button>
                       }
                       
-                      <FormModal show={show} showLoginForm= {showLoginForm} setshowLoginForm={setshowLoginForm} setShow={setShow} setUserState={setUserState} getUserData ={getUserData}/>
+                      <FormModal show={show} showLoginForm= {showLoginForm} setshowLoginForm={setshowLoginForm} setShow={setShow}/>
                     </div>
                   </div>
               </div>
