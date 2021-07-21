@@ -23,11 +23,11 @@ function Header(props){
         <div>
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom_nav">
               <div className="container">
-                  <h4 className="navbar-left color-text" onClick={handleOnClick}>Book Review System</h4>
+                  <h5 className="navbar-left color-text" onClick={handleOnClick}>Book Review System</h5>
                   {/* <div></div> */}
-                  <div class="col-lg-4 col-md-4">
-                    <div class="input-group mb-1 ml-5">
-                        <input type="search" class="form-control form-control-sm" placeholder="Search by book name..." aria-label="Recipient's username" aria-describedby="button-addon2" onChange={searchHandler}/>
+                  <div className="col-lg-4 col-md-4">
+                    <div className="input-group mb-1 ml-5">
+                        <input type="search" className="form-control form-control-sm" placeholder="Search by book name..." aria-label="Recipient's username" aria-describedby="button-addon2" onChange={searchHandler}/>
                     </div>
             </div>
                   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

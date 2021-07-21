@@ -38,7 +38,7 @@ class ReviewForm extends Component {
             let formattedDate = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
             axios.post('http://localhost:3002/addReview', {
                user_id:JSON.parse(sessionStorage.getItem("user")).id,
-               book_id:this.props.book_id,
+               book_id:Number(this.props.book_id),
                review:this.state.description,
                title:this.state.title,
                rating:this.state.rating,

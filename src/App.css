@@ -227,11 +227,12 @@ section.copy p {
   -webkit-box-orient: vertical;
 }
 
-.color-text{
-  color:#fff;
+.color-text {
+  color: #fff;
+  cursor: pointer;
 }
-@media screen and (min-width:480px){
-  .ml-5{
-    margin-left:10px;
+@media screen and (min-width: 480px) {
+  .ml-5 {
+    margin-left: 10px;
   }
 }
