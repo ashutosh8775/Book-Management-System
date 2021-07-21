@@ -3,10 +3,7 @@ import axios from "axios";
 import Spinner from 'react-bootstrap/Spinner';
 import { useHistory, useParams } from "react-router-dom";
 import StarRatingComponent from 'react-star-rating-component';
-// import {logo} from "/*.jpg";
 
-// import './home.css';
-// console.log(logo,'logo')
 const imageData = {
     "data":[
         {"id":1,"path":"/images/book1.jpg"},

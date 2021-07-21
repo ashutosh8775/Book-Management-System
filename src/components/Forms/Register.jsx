@@ -11,7 +11,7 @@ class Register extends Component {
                 email: '',
                 mobile_no: '',
                 password: ''
-                //password_confirmation: ''
+                
             },
             password_confirmation:'',
             errors : '',
@@ -50,13 +50,11 @@ class Register extends Component {
         );
 
         this.form.useRules({
-            // firstname: "required|alpha|between:3,20",
-            // lastname: "required|alpha|between:3,20",
             username: "required|alpha_dash|between:3,20",
             email: "required|email",
             mobile_no: "required|numeric|digits:10",
             password: "required|min:8|max:15|custompassword",
-            //password_confirmation: "required|alpha_num|min:8"
+            
         });
 
         this.form.onformsubmit = (fields) => {
