@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import ReviewForm from "./ReviewForm";
 import ReviewList from "./ReviewList";
 import ReviewPagination from "./ReviewPagination";
-import axios from "axios"
 import "./Review.css";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";

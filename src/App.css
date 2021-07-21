@@ -226,3 +226,13 @@ section.copy p {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
+
+.color-text {
+  color: #fff;
+  cursor: pointer;
+}
+@media screen and (min-width: 480px) {
+  .ml-5 {
+    margin-left: 10px;
+  }
+}

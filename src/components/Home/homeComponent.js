@@ -3,6 +3,9 @@ import axios from "axios";
 import Spinner from 'react-bootstrap/Spinner';
 import { useHistory, useParams } from "react-router-dom";
 import StarRatingComponent from 'react-star-rating-component';
+import { connect } from 'react-redux';
+import { previewDetails } from "../action";
+// import {logo} from "/*.jpg";
 
 const imageData = {
     "data":[
@@ -18,7 +21,7 @@ const imageData = {
         {"id":10,"path":"/images/book10.jpg"}
     ]
 }
-function Home() {
+function Home(props) {
     const [booksData, getBooks] = useState([]);
     const [loading,setLoading] = useState(false);
     let history = useHistory();
@@ -43,11 +46,10 @@ function Home() {
     },[])
 
     //redirectTo book preview page
-    console.log(history,'ll');
     function viewBook(book){
         history.push("/bookPreview"+"/"+book.id);
     }
-
+    
     return (
             
     <section className="online-courses">
@@ -55,8 +57,8 @@ function Home() {
             <div className="row justify-content-center">
                 <div className="col-lg-6 col-md-6">
                     <div className="online-courses-text-widget">
-                        <h2>Online Books</h2>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit minus delectus error possimus vitae dolorum odio aliquam! Veritatis eos, nesciunt velit saepe quis, numquam sed nisi consequatur recusandae, atque quasi.</p>
+                    <h2>Discover The Best Books Online</h2>
+                        <p>Reading lists begin as a shelf full of hope until the year flies by, and you find yourself flooded with procrastination. Cheers to the books we’ve been meaning to read all these years and should probably start at some point. And for more book recommendations, find out what’s trending right now.</p>
                         <a href="#" className="btn btn-warning btn-sm">Popular Books</a>
                     </div>
                 </div>
@@ -64,13 +66,18 @@ function Home() {
              <div className="row mt-5">
              {loading ? 
                 <Spinner animation="border"/>: 
-                    
-                    booksData.map((book) =>{
+                booksData.filter(function(obj){
+                    return Object.keys(obj).some(function(key){
+                        if(key == "name"){
+                              return obj[key].toLowerCase().includes(props.BookData.toLowerCase());
+                        }
+                    })
+                }).map((book) =>{
                     return (
 
                     <div className="col-lg-3 col-md-6 col-sm-6" key={book.id} >
                         <div className="card online-course-card">
-                            <img src={book.imagePath} height="300"/>
+                            <img src={book.imagePath} height="250"/>
                             <div className="card-body">
                             <h3 className="card-title">{book.name}</h3>
                             <StarRatingComponent 
@@ -85,12 +92,17 @@ function Home() {
                         </div>
                     </div>
                         )
-                    })             
+                    })   
+                              
                 }
                 </div>
     </div>
 </section>
     );
 }
-
-export default Home;
+const mapStateToProps = state => {
+    return {
+      BookData:state.BookData
+    }
+  }
+  export default connect(mapStateToProps)(Home);

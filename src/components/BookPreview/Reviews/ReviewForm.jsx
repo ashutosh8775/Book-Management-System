@@ -26,11 +26,11 @@ class ReviewForm extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        if(this.state.rating < 1 && this.state.description == ''){
+        if(this.state.rating < 1 && this.state.description === ''){
              this.setState({ratingErrMsg: 'Rating is required', descErrMsg:'Review Description in required'});
         } else if(this.state.rating < 1){
             this.setState({ratingErrMsg: 'Rating is required'});
-        } else if (this.state.description == ''){
+        } else if (this.state.description === ''){
             this.setState({descErrMsg:'Review Description in required'});
         } else {
             //api call will come here
@@ -38,7 +38,7 @@ class ReviewForm extends Component {
             let formattedDate = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
             axios.post('http://localhost:3002/addReview', {
                user_id:JSON.parse(sessionStorage.getItem("user")).id,
-               book_id:this.props.book_id,
+               book_id:Number(this.props.book_id),
                review:this.state.description,
                title:this.state.title,
                rating:this.state.rating,
@@ -49,7 +49,7 @@ class ReviewForm extends Component {
                } 
             })
             .then(response => {
-                if(response.data[0].status == "success"){
+                if(response.data[0].status === "success"){
                     this.props.calcAvgRating(this.state.rating); //rating is passed to book_info comp to calc avg rating
                     this.setState({title:'', description:'',rating:''});
                     let updateReviewList = this.props.reviewsList;
