@@ -5,7 +5,7 @@ const initialState = {
   const reducer = (state = initialState, action) => {
     switch (action.type) {
 
-        case "PREVIEW":
+        case "Search":
             console.log(action.payload.data,'dd')
             return {
                 ...state,

@@ -2,7 +2,7 @@
 
 export const previewDetails = (payload) => {
     return {
-        type: "PREVIEW",
+        type: "Search",
         payload
     }
 }
